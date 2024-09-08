@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <main class="px-3 mt-3 h-100"
+          style="
+                  background-image: url('{{ asset('assets/images/img-fond.jpg') }}');
+                  background-size: cover;
+                  background-position: center;
+                  background-repeat: no-repeat;
+                  min-height: 90vh;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  color: white;
+                  ">
+
+        <div class="text-center w-75 bulle" >
+            <h1>Bienvenue au zoo Arcadia</h1>
+            <p class="lead">Le Zoo Arcadia, situé près de la forêt de Brocéliande en Bretagne, est un lieu dédié à la préservation des animaux. Avec des habitats variés comme la savane, la jungle et les marais, il accueille des visiteurs curieux de découvrir sa faune et de partager ses valeurs écologiques.</p>
+        </div>
+    </main>
+{% endblock %}
