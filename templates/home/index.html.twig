@@ -19,4 +19,55 @@
             <p class="lead">Le Zoo Arcadia, situé près de la forêt de Brocéliande en Bretagne, est un lieu dédié à la préservation des animaux. Avec des habitats variés comme la savane, la jungle et les marais, il accueille des visiteurs curieux de découvrir sa faune et de partager ses valeurs écologiques.</p>
         </div>
     </main>
+        <div class="row ">
+            <h2 class="mt-4 mb-3"> Nos services</h2>
+
+            {% for service in services %}
+                <div class="col-lg-4">
+
+
+                    <img src="/uploads/images/services/{{ service.illustration }}" class="bd-placeholder-img rounded-circle" width="200" height="200"  style="object-fit: cover"  focusable="false">
+                    <h3>{{service.nom  }}</h3>
+                    <p>{{ service.descriptionhome }}</p>
+
+                </div>
+            {% endfor %}
+
+        </div>
+    <hr>
+        <div class="row">
+            <h2 class="mt-4 mb-3"> Nos Habitats</h2>
+
+
+            {% for habitat in habitats %}
+                <div class="container-fluid w-75 p-0" >
+                    <img src="/uploads/images/habitats/{{ habitat.illustration }}" alt="" class="img-fluid w-100  object-fit-cover overflow-hidden" style="height: 300px">
+                    <h3>{{habitat.nom  }}</h3>
+
+                </div>
+            {% endfor %}
+
+
+            <hr>
+        </div>
+
+    <div class="container container-fluid mx-auto">
+
+        <h3 class="text-center mt-5">Vos avis</h3>
+        <div class="container   justify-content-center  mt-3">
+            {% for row in avis|batch(4) %}
+                <div class="row d-flex justify-content-center mx-auto">
+                    {% for aviss in row %}
+                        <div class="col-md-3 text-center">
+                            {% for i in 1..aviss.note|round %}
+                                &#9733;
+                            {% endfor %}
+                            <p class="mt-2">{{ aviss.commentaire }}</p>
+                            <p class="mt-1 blockquote-footer"> {{ aviss.nom }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+
+    </div>
 {% endblock %}

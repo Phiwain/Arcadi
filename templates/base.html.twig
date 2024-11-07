@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <title>Zoo - Arcadia</title>
+    <title>{% block title %}Zoo Arcadia{% endblock %}</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/cover/">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
@@ -29,20 +29,25 @@
             <div class="collapse navbar-collapse nav-masthead mx-auto" id="navbarCollapse">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item py-1 px-2 ">
-                        <a class="nav-link fw-bold active" aria-current="page" href="#">Accueil</a>
+                        <a class="nav-link fw-bold active" aria-current="page" href="{{ path('app_home') }}">Accueil</a>
                     </li>
                     <li class="nav-item py-1 px-2 ">
-                        <a class="nav-link fw-bold " href="#">Services</a>
+                        <a class="nav-link fw-bold " href="{{ path('app_services') }}">Services</a>
                     </li>
                     <li class="nav-item py-1 px-2 ">
-                        <a class="nav-link fw-bold " href="#">Habitats</a>
+                        <a class="nav-link fw-bold " href="{{ path('app_habitats') }}">Habitats</a>
                     </li>
                     <li class="nav-item py-1 px-2 ">
-                        <a class="nav-link fw-bold  " href="#">Contact</a>
+                        <a class="nav-link fw-bold  " href="{{ path('app_contact') }}">Contact</a>
                     </li>
                 </ul>
                 <hr class="d-block d-md-none mb-sm-2">
-                <a class=" fw-bold py-1 px-2 nav-link-bordered" href="#">Espace Professionel</a>
+                {% if app.user %}
+                <a href="{{ path('account') }}"><button type="button" class="fw-bold py-1 px-2 nav-link-bordered">Mon espace Pro</button></a>   <a href="{{ path('app_logout') }}"><button type="button" class="btn btn-outline-danger m-2">Deconnexion</button></a>
+            {% else %}
+                <a href="{{ path('app_login') }}"><button type="button" class="fw-bold py-1 px-2 nav-link-bordered">Espace Professionel</button></a>
+                {% endif%}
+
             </div>
         </nav>
     </header>
