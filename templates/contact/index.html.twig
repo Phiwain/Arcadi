@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Contactez-nous</h1>
+
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    <div class="row">
+        <div class="col-md-6 mt-3">
+            <h3 class="mb-2">Envoyer un message</h3>
+            {{ form_start(contactForm) }}
+            {{ form_row(contactForm.titreDemande) }}
+            {{ form_row(contactForm.message) }}
+            {{ form_row(contactForm.email) }}
+            {{ form_row(contactForm.submit) }}
+            {{ form_end(contactForm) }}
+        </div>
+
+        <div class="col-md-6 mt-3">
+            <h3 class="mb-2">Laisser un avis</h3>
+            {{ form_start(avisForm) }}
+            {{ form_row(avisForm.nom) }}
+            {{ form_row(avisForm.commentaire) }}
+            {{ form_row(avisForm.note) }}
+            {{ form_row(avisForm.submit) }}
+            {{ form_end(avisForm) }}
+        </div>
+    </div>
+{% endblock %}
