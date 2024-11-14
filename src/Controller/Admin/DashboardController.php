@@ -54,7 +54,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Habitats', 'fas fa-concierge-bell', Habitats::class);
         yield MenuItem::linkToCrud('Race des Animaux', 'fas fa-concierge-bell', AnimalRace::class);
         yield MenuItem::linkToCrud('Animaux', 'fas fa-concierge-bell', Amnial::class);
-        yield MenuItem::linkToCrud('Rapports vétérinaires', 'fas fa-concierge-bell', Rapports::class);
         yield MenuItem::linkToCrud('Avis', 'fas fa-comment', Avis::class);
+
+        yield MenuItem::linkToRoute('Gérer les mises à jour des animaux', 'fas fa-paw', 'app_animal_status');
     }
 }

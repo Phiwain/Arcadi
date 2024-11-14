@@ -33,9 +33,19 @@ class Amnial
     #[ORM\OneToMany(targetEntity: Rapports::class, mappedBy: 'Animal')]
     private Collection $rapports;
 
+    /**
+     * @var Collection<int, AnimalUpdate>
+     */
+    #[ORM\OneToMany(targetEntity: AnimalUpdate::class, mappedBy: 'Animal')]
+    private Collection $animalUpdates;
+
+    #[ORM\Column]
+    private ?float $Poids = null;
+
     public function __construct()
     {
         $this->rapports = new ArrayCollection();
+        $this->animalUpdates = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -121,6 +131,48 @@ class Amnial
                 $rapport->setAnimal(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, AnimalUpdate>
+     */
+    public function getAnimalUpdates(): Collection
+    {
+        return $this->animalUpdates;
+    }
+
+    public function addAnimalUpdate(AnimalUpdate $animalUpdate): static
+    {
+        if (!$this->animalUpdates->contains($animalUpdate)) {
+            $this->animalUpdates->add($animalUpdate);
+            $animalUpdate->setAnimal($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAnimalUpdate(AnimalUpdate $animalUpdate): static
+    {
+        if ($this->animalUpdates->removeElement($animalUpdate)) {
+            // set the owning side to null (unless already changed)
+            if ($animalUpdate->getAnimal() === $this) {
+                $animalUpdate->setAnimal(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getPoids(): ?float
+    {
+        return $this->Poids;
+    }
+
+    public function setPoids(float $Poids): static
+    {
+        $this->Poids = $Poids;
 
         return $this;
     }

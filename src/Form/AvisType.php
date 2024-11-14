@@ -30,7 +30,8 @@ class AvisType extends AbstractType
                 ],
             ])
             ->add(child: 'submit',type: SubmitType::class,options: [
-                'label'=>"Laissez un avis"
+                'label'=>"Laissez un avis",
+                'attr' => ['class' => 'btn btn-success'],
             ])
         ;
     }

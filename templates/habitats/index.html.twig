@@ -55,24 +55,22 @@
 
                                                     <hr>
 
-                                                    <!-- Informations des Rapports -->
                                                     {% if animal.rapports|length > 0 %}
-                                                        <h5>Informations</h5>
-                                                        {% for rapport in animal.rapports %}
-                                                            <div class="rapport mb-3">
-                                                                <p><strong>Date du dernier passage vétérinaire :</strong> {{ rapport.datepassage|date('d/m/Y') }}</p>
-                                                                <p><strong>État de santé :</strong> {{ rapport.etat }}</p>
-                                                                <p><strong>Nourriture :</strong> {{ rapport.nourriture }}</p>
-                                                                <p><strong>Poids de la nourriture :</strong> {{ rapport.Poidsnourriture }} g</p>
-                                                                {% if rapport.detail %}
-                                                                    <p><strong>Détails :</strong> {{ rapport.detail }}</p>
-                                                                {% endif %}
-                                                                <hr>
-                                                            </div>
-                                                        {% endfor %}
+                                                        {% set dernierRapport = animal.rapports|first %}
+                                                        <div class="rapport mb-3">
+                                                            <p><strong>Date du dernier passage vétérinaire :</strong> {{ dernierRapport.datePassage|date('d/m/Y') }}</p>
+                                                            <p><strong>Poids de l'animal :</strong> {{ dernierRapport.poids }} Kg</p>
+                                                            <p><strong>État de santé :</strong> {{ dernierRapport.etat }}</p>
+                                                            <p><strong>Nourriture :</strong> {{ dernierRapport.nourriture }}</p>
+                                                            <p><strong>Poids de la nourriture :</strong> {{ dernierRapport.poidsNourriture }} g</p>
+                                                            {% if dernierRapport.detail %}
+                                                                <div><strong>Détails :</strong> {{ dernierRapport.detail|striptags }}</div>
+                                                            {% endif %}
+                                                        </div>
                                                     {% else %}
                                                         <p>Aucun rapport disponible pour cet animal.</p>
                                                     {% endif %}
+
                                                 </div>
                                             </div>
                                         </div>
@@ -89,7 +87,6 @@
             </div>
         {% endfor %}
     </div>
-
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {

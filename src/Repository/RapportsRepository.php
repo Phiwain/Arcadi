@@ -16,7 +16,19 @@ class RapportsRepository extends ServiceEntityRepository
         parent::__construct($registry, Rapports::class);
     }
 
-    //    /**
+    public function findLatestReportByAnimal()
+    {
+        return $this->createQueryBuilder('r')
+            ->select('r')
+            ->join('r.animal', 'a')
+            ->addSelect('a')
+            ->orderBy('r.datePassage', 'DESC')
+            ->groupBy('a.id')
+            ->getQuery()
+            ->getResult();
+    }
+
+
     //     * @return Rapports[] Returns an array of Rapports objects
     //     */
     //    public function findByExampleField($value): array

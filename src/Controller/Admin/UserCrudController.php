@@ -6,20 +6,25 @@ use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\PasswordField;
+
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\PassworField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserCrudController extends AbstractCrudController
 {
     private $passwordHasher;
+    private $mailer;
 
-    public function __construct(UserPasswordHasherInterface $passwordHasher)
+    public function __construct(UserPasswordHasherInterface $passwordHasher, MailerInterface $mailer)
     {
         $this->passwordHasher = $passwordHasher;
+        $this->mailer = $mailer;
     }
     public static function getEntityFqcn(): string
     {
@@ -34,11 +39,11 @@ class UserCrudController extends AbstractCrudController
         }
 
         // Encoder le mot de passe si le plainPassword est défini
-        if ($entityInstance->getPlainPassword()) {
+        if ($entityInstance->getPassword()) {
             $entityInstance->setPassword(
                 $this->passwordHasher->hashPassword(
                     $entityInstance,
-                    $entityInstance->getPlainPassword()
+                    $entityInstance->getPassword()
                 )
             );
             $entityInstance->eraseCredentials();
@@ -56,11 +61,11 @@ class UserCrudController extends AbstractCrudController
             return;
         }
 
-        if ($entityInstance->getPlainPassword()) {
+        if ($entityInstance->getPassword()) {
             $entityInstance->setPassword(
                 $this->passwordHasher->hashPassword(
                     $entityInstance,
-                    $entityInstance->getPlainPassword()
+                    $entityInstance->getPassword()
                 )
             );
             $entityInstance->eraseCredentials();
@@ -69,6 +74,20 @@ class UserCrudController extends AbstractCrudController
         parent::updateEntity($entityManager, $entityInstance);
     }
 
+
+
+
+    private function sendWelcomeEmail(User $user): void
+    {
+        $email = (new Email())
+            ->from('admin@example.com')
+            ->to($user->getEmail())
+            ->subject('Bienvenue sur notre plateforme')
+            ->html('<p>Bonjour ' . htmlspecialchars($user->getNom()) . ',</p><p>Bienvenue sur notre plateforme !</p>');
+
+        // Envoyer l'email
+        $this->mailer->send($email);
+    }
   public function configureFields(string $pageName): iterable
     {
       $roles = ['Soigneur' => 'ROLE_SOIGNEUR', 'Vétérinaire' => 'ROLE_VETERINAIRE'];
@@ -79,7 +98,8 @@ class UserCrudController extends AbstractCrudController
             TextField::new('nom'),
             TextField::new('prenom'),
             // Utilisez PasswordField pour le mot de passe
-           TextField::new('plainPassword', 'Mot de passe')
+
+            TextField::new('Password', 'Mot de passe')
                 ->onlyWhenCreating()
                 ->setHelp('Laissez vide pour conserver le mot de passe actuel'),
             ChoiceField::new('roles')

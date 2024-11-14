@@ -7,6 +7,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class AmnialCrudController extends AbstractCrudController
@@ -28,6 +29,7 @@ class AmnialCrudController extends AbstractCrudController
             TextField::new('nom'),
             AssociationField::new('race'),
             AssociationField::new('habitat'),
+            NumberField::new('Poids'),
             ImageField::new('illustration')
                 ->setBasePath('/uploads/images/animaux')
                 ->setUploadDir('public/uploads/images/animaux')

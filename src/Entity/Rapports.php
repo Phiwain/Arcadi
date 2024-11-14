@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Entity;
 
 use App\Repository\RapportsRepository;
@@ -21,16 +20,19 @@ class Rapports
     private ?string $nourriture = null;
 
     #[ORM\Column]
-    private ?float $Poidsnourriture = null;
+    private ?float $poidsNourriture = null; // camelCase pour cohérence
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $datepassage = null;
+    private ?\DateTimeInterface $datePassage = null; // camelCase pour cohérence
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $detail = null;
 
     #[ORM\ManyToOne(inversedBy: 'rapports')]
-    private ?Amnial $Animal = null;
+    private ?Amnial $Animal = null; // renommé pour cohérence
+
+    #[ORM\Column]
+    private ?float $poids = null;
 
     public function getId(): ?int
     {
@@ -61,26 +63,26 @@ class Rapports
         return $this;
     }
 
-    public function getPoidsnourriture(): ?float
+    public function getPoidsNourriture(): ?float
     {
-        return $this->Poidsnourriture;
+        return $this->poidsNourriture;
     }
 
-    public function setPoidsnourriture(float $Poidsnourriture): static
+    public function setPoidsNourriture(float $poidsNourriture): static
     {
-        $this->Poidsnourriture = $Poidsnourriture;
+        $this->poidsNourriture = $poidsNourriture;
 
         return $this;
     }
 
-    public function getDatepassage(): ?\DateTimeInterface
+    public function getDatePassage(): ?\DateTimeInterface
     {
-        return $this->datepassage;
+        return $this->datePassage;
     }
 
-    public function setDatepassage(\DateTimeInterface $datepassage): static
+    public function setDatePassage(\DateTimeInterface $datePassage): static
     {
-        $this->datepassage = $datepassage;
+        $this->datePassage = $datePassage;
 
         return $this;
     }
@@ -102,9 +104,21 @@ class Rapports
         return $this->Animal;
     }
 
-    public function setAnimal(?Amnial $Animal): static
+    public function setAnimal(?Amnial $Animal): self
     {
         $this->Animal = $Animal;
+
+        return $this;
+    }
+
+    public function getPoids(): ?float
+    {
+        return $this->poids;
+    }
+
+    public function setPoids(float $poids): static
+    {
+        $this->poids = $poids;
 
         return $this;
     }

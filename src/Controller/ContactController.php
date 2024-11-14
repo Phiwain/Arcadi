@@ -35,24 +35,25 @@ class ContactController extends AbstractController
 
         // Vérifier quel formulaire a été soumis
         if ($contactForm->isSubmitted() && $contactForm->isValid()) {
-            // Traiter le formulaire de contact
-            // Envoyer l'email
             $email = (new TemplatedEmail())
                 ->from(new Address($contactMessage->getEmail()))
-                ->to('contact@votrezoo.com') // Remplacez par l'email du zoo
+                ->to('contact@zooarcadia.fr') // Remplacez ici avec l'adresse du zoo
                 ->subject($contactMessage->getTitreDemande())
                 ->htmlTemplate('emails/contact.html.twig')
                 ->context([
+                    'subject' => $contactMessage->getTitreDemande(),
                     'message' => $contactMessage->getMessage(),
-                    'email' => $contactMessage->getEmail(),
+                    'userEmail' => $contactMessage->getEmail(), // Utilisez 'userEmail' au lieu de 'email'
                 ]);
 
             $mailer->send($email);
 
             $this->addFlash('success', 'Votre message a été envoyé avec succès.');
-
             return $this->redirectToRoute('app_contact');
         }
+
+
+
 
         if ($avisForm->isSubmitted() && $avisForm->isValid()) {
             // Traiter le formulaire d'avis

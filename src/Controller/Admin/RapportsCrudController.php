@@ -30,9 +30,10 @@ class RapportsCrudController extends AbstractCrudController
     {
         return [
             AssociationField::new('Animal', 'Animal'),
+            NumberField::new('Poids', 'Poids de l\'animal en Kg'),
             TextField::new('etat'),
             TextField::new('nourriture', label: 'Nourriture proposée'),
-            NumberField::new('Poidsnourriture', label: 'Quantité de nourriture en gramme'),
+            NumberField::new('Poidsnourriture', label: 'Quantité de nourriture en g'),
             DatetimeField::new('datepassage', label: 'Date du dernier passage'),
             TextEditorField::new('detail', 'Détail sur l\'état de l\'animal si besoin')
 
