@@ -103,7 +103,17 @@ class Amnial
     public function __toString(){
         return $this->nom;
     }
+    private $views = 0;
 
+    public function getViews()
+    {
+        return $this->views;
+    }
+
+    public function setViews($views)
+    {
+        $this->views = $views;
+    }
 
     /**
      * @return Collection<int, Rapports>
