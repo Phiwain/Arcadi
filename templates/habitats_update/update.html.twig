@@ -1,0 +1,45 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Mettre à jour l'habitat{% endblock %}
+
+{% block body %}
+    <div class="text-center w-75 mx-auto">
+        <h2 class="mt-3">Historique des mises à jour pour : {{ habitat.nom }}</h2>
+
+        <h3 class="my-5">Historique des mises à jour</h3>
+
+        {% if updates is not empty %}
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Avis</th>
+                    <th>Amélioration</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for update in updates %}
+                    <tr>
+                        <td>{{ update.createdAt|date('d/m/Y H:i') }}</td>
+                        <td>{{ update.avis }}</td>
+                        <td>{{ update.amelioration }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>Aucune mise à jour enregistrée pour cet habitat.</p>
+        {% endif %}
+
+        <h3 class="my-4">Laisser un avis sur l'habitat</h3>
+
+        {{ form_start(form) }}
+        {{ form_row(form.avis) }}
+        {{ form_row(form.amelioration) }}
+        <button type="submit" class="btn btn-success mt-4">Enregistrer la mise à jour</button>
+        {{ form_end(form) }}
+
+        <a href="{{ path('app_habitats_update') }}" class="btn btn-secondary mt-4">Retour au choix de l'habitat</a>
+    </div>
+{% endblock %}

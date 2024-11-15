@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class RapportsVeterinaireController extends AbstractController
 {
-    #[Route('/rapport/status', name: 'app_rapports_status')]
+    #[Route('/update/rapport/status', name: 'app_rapports_status')]
     public function index(EntityManagerInterface $entityManager): Response
     {
         // Récupérer tous les animaux
@@ -26,7 +26,7 @@ class RapportsVeterinaireController extends AbstractController
     }
 
     // Méthode pour mettre à jour un rapport existant
-    #[Route('/rapport/status/update/{id}', name: 'app_rapports_status_update')]
+    #[Route('/update/rapport/status/{id}', name: 'app_rapports_status_update')]
     public function update(int $id, Request $request, EntityManagerInterface $entityManager): Response
     {
         // Récupérer le rapport existant
@@ -75,7 +75,7 @@ class RapportsVeterinaireController extends AbstractController
     }
 
     // Méthode pour créer un nouveau rapport pour un animal
-    #[Route('/rapport/status/create/{animalId}', name: 'app_rapports_status_create')]
+    #[Route('/update/rapport/status/create/{animalId}', name: 'app_rapports_status_create')]
     public function create(int $animalId, Request $request, EntityManagerInterface $entityManager): Response
     {
         $animal = $entityManager->getRepository(Amnial::class)->find($animalId);
@@ -114,7 +114,7 @@ class RapportsVeterinaireController extends AbstractController
         ]);
     }
 
-    #[Route('/animal/{id}/rapports', name: 'app_animal_rapports_list')]
+    #[Route(' /update/animal/{id}/rapports', name: 'app_animal_rapports_list')]
     public function listRapports(int $id, EntityManagerInterface $entityManager): Response
     {
         // Récupérer l'animal spécifique

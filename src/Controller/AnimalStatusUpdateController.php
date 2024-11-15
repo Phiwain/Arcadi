@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AnimalStatusUpdateController extends AbstractController
 {
-    #[Route('/animal/status', name: 'app_animal_status')]
+    #[Route('/update/animal/status', name: 'app_animal_status')]
     public function index(EntityManagerInterface $entityManager): Response
     {
         // Récupérer tous les animaux
@@ -25,7 +25,7 @@ class AnimalStatusUpdateController extends AbstractController
         ]);
     }
 
-    #[Route('/animal/status/update/{id}', name: 'app_animal_status_update')]
+    #[Route('/update/animal/status/{id}', name: 'app_animal_status_update')]
     public function update(int $id, Request $request, EntityManagerInterface $entityManager): Response
     {
         // Récupérer l'animal spécifique

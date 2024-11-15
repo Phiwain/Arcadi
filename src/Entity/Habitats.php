@@ -30,9 +30,16 @@ class Habitats
     #[ORM\OneToMany(targetEntity: Amnial::class, mappedBy: 'habitat')]
     private Collection $amnials;
 
+    /**
+     * @var Collection<int, HabitatsUpdate>
+     */
+    #[ORM\OneToMany(targetEntity: HabitatsUpdate::class, mappedBy: 'habitat')]
+    private Collection $habitatsUpdates;
+
     public function __construct()
     {
         $this->amnials = new ArrayCollection();
+        $this->habitatsUpdates = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -103,6 +110,36 @@ class Habitats
             // set the owning side to null (unless already changed)
             if ($amnial->getHabitat() === $this) {
                 $amnial->setHabitat(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, HabitatsUpdate>
+     */
+    public function getHabitatsUpdates(): Collection
+    {
+        return $this->habitatsUpdates;
+    }
+
+    public function addHabitatsUpdate(HabitatsUpdate $habitatsUpdate): static
+    {
+        if (!$this->habitatsUpdates->contains($habitatsUpdate)) {
+            $this->habitatsUpdates->add($habitatsUpdate);
+            $habitatsUpdate->setHabitat($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHabitatsUpdate(HabitatsUpdate $habitatsUpdate): static
+    {
+        if ($this->habitatsUpdates->removeElement($habitatsUpdate)) {
+            // set the owning side to null (unless already changed)
+            if ($habitatsUpdate->getHabitat() === $this) {
+                $habitatsUpdate->setHabitat(null);
             }
         }
 
