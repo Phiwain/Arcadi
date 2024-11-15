@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Choisir un habitat à mettre à jour{% endblock %}
+
+{% block body %}
+    <h1>Choisir un habitat à mettre à jour</h1>
+
+    <ul>
+        {% for habitat in habitats %}
+            <li>
+                <a href="{{ path('app_habitats_update_update', {'id': habitat.id}) }}">
+                    {{ habitat.nom }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
