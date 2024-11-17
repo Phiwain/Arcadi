@@ -8,7 +8,7 @@
     {% if rapports is not empty %}
         <ul>
             {% for rapport in rapports %}
-                <li>
+                <li class="list-group-item ">
                     <a href="{{ path('app_rapports_status_update', { 'id': rapport.id }) }}">
                         Rapport du {{ rapport.datePassage|date('d/m/Y') }} - {{ rapport.etat }}
                     </a>

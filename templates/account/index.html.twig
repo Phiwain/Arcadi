@@ -6,9 +6,17 @@
     <div class="mt-5 p-5">
         <h1>Mon compte</h1>
 
+        <hr>       {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('admin') }}">Panneau d'administration</a>
+        {% elseif is_granted('ROLE_SOIGNEUR')%}
+            <a href="{{ path('employee_dashboard') }}">Panneau d'administration</a>
+        {% else %}
+            <a href="{{ path('veterinaire_dashboard') }}">Panneau d'administration</a>
+        {% endif %}
+
         <hr>
         <a href="{{ path('account_password') }}">Modifier mon mot de passe</a>
-        <hr>
+
 
     </div>
 

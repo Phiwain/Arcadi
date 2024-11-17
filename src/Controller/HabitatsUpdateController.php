@@ -21,11 +21,11 @@ class HabitatsUpdateController extends AbstractController
     public function index(HabitatsRepository $habitatsRepository): Response
     {
         $habitats = $habitatsRepository->findAll();
-        $openings=$this->entityManager->getRepository(Ouvertures::class)->findAll();
+
 
         return $this->render('habitats_update/index.html.twig', [
             'habitats' => $habitats,
-            'openings' => $openings,
+
         ]);
     }
     #[Route('/update/habitats/{id}', name: 'app_habitats_update_update')]

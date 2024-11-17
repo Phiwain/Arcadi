@@ -44,19 +44,19 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Arcadia');
+            ->setTitle('Espace Professionnel - Administrateur');
     }
 
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('User', 'fas fa-user', User::class);
+        yield MenuItem::linkToCrud('Ouverture', 'fas fa-clock', Ouvertures::class);
         yield MenuItem::linkToCrud('Service', 'fas fa-concierge-bell', Service::class);
         yield MenuItem::linkToCrud('Habitats', 'fas fa-concierge-bell', Habitats::class);
         yield MenuItem::linkToCrud('Race des Animaux', 'fas fa-concierge-bell', AnimalRace::class);
         yield MenuItem::linkToCrud('Animaux', 'fas fa-concierge-bell', Amnial::class);
-        yield MenuItem::linkToCrud('Avis', 'fas fa-comment', Avis::class);
-        yield MenuItem::linkToCrud('Ouverture', 'fas fa-clock', Ouvertures::class);
-        yield MenuItem::linkToRoute('Gérer les mises à jour des animaux', 'fas fa-paw', 'app_animal_status');
+
+        yield MenuItem::linkToRoute('Compte rendus vétérinaires', 'fas fa-paw', 'app_all_rapports');
     }
 }

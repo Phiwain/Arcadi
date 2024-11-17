@@ -7,7 +7,7 @@
 
     <ul>
         {% for habitat in habitats %}
-            <li>
+            <li class="list-group-item">
                 <a href="{{ path('app_habitats_update_update', {'id': habitat.id}) }}">
                     {{ habitat.nom }}
                 </a>
