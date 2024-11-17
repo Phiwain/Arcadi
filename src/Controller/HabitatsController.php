@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Habitats;
+use App\Entity\Ouvertures;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,9 +21,11 @@ class HabitatsController extends AbstractController
     public function index(): Response
     {
         $habitats = $this->entityManager->getRepository(Habitats::class)->findAll();
+        $openings=$this->entityManager->getRepository(Ouvertures::class)->findAll();
 
         return $this->render('habitats/index.html.twig', [
             'habitats' => $habitats,
+            'openings' => $openings,
         ]);
     }
 

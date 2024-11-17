@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Ouvertures;
 use App\Entity\Service;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,8 +21,10 @@ class ServiceController extends AbstractController
     public function index(): Response
     {
         $services=$this->entityManager->getRepository(Service::class)->findAll();
+        $openings=$this->entityManager->getRepository(Ouvertures::class)->findAll();
         return $this->render('service/index.html.twig',[
             'services'=>$services,
+            'openings'=>$openings
         ]);
     }
 }

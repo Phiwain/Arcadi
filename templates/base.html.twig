@@ -58,7 +58,7 @@
     <footer class="container">
         <div class="row mt-3 mb-3">
             <!-- Colonne 1: Adresse -->
-            <div class="col-12 col-md-3 d-flex flex-column align-items-center justify-content-center text-center fs-4">
+            <div class="col-12 col-md-4 d-flex flex-column align-items-center justify-content-center text-center fs-4">
                 <address>
                     <p>Zoo Arcadia<br>
                         Avenue des fougères<br>
@@ -67,32 +67,15 @@
             </div>
             <hr class="d-block d-md-none my-3">
             <!-- Colonne 2: Google Maps -->
-            <div class="col-12 col-md-3 d-flex align-items-center text-center">
+            <div class="col-12 col-md-4 d-flex align-items-center text-center">
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7241.555941765286!2d-2.1894747782877926!3d48.01369631507954!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x480fad108767738d%3A0x40ca5cd36e4acd0!2s35380%20Paimpont!5e0!3m2!1sfr!2sfr!4v1725825382669!5m2!1sfr!2sfr"
                         width="100%" height="275" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
             <hr class="d-block d-md-none my-3">
-            <!-- Colonne 3: Horaires -->
-            <div class="col-12 col-md-3 d-flex flex-column align-items-center text-center my-auto mt-sm-2">
-                <h4 class="fs-4">Horaires d'ouverture</h4>
 
-                {% for opening in openings %}
-
-                        <ul class="list-unstyled">
-                            <li class="p-1">
-                                {% if opening.Day is not null %}{{ opening.Day }} de {% endif %}
-                                {% if opening.OpenMorning is not null %}{{ opening.OpenMorning }} h à {% endif %}
-                                {% if opening.ClosedMorning is not null %}{{ opening.ClosedMorning }} h{% endif %}
-                                {% if opening.OpenEvening is not null %} et de {{ opening.OpenEvening }} h à {% endif %}
-                                {% if opening.ClosedEvening is not null %}{{ opening.ClosedEvening }} h{% endif %}
-                            </li>
-                        </ul>
-
-                {% endfor %}
-            </div>
             <hr class="d-block d-md-none my-3">
             <!-- Colonne 4: Réseaux Sociaux -->
-            <div class="col-12 col-md-3 d-flex align-items-center justify-content-center fs-4 mt-sm-2">
+            <div class="col-12 col-md-4 d-flex align-items-center justify-content-center fs-4 mt-sm-2">
                 <div>
                     <div class="d-flex align-items-center mb-2">
                         <i class="fab fa-facebook-f me-2"></i>
