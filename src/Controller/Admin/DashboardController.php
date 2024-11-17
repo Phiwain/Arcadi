@@ -6,6 +6,7 @@ use App\Entity\Amnial;
 use App\Entity\AnimalRace;
 use App\Entity\Avis;
 use App\Entity\Habitats;
+use App\Entity\Ouvertures;
 use App\Entity\Rapports;
 use App\Entity\Service;
 use App\Entity\User;
@@ -55,7 +56,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Race des Animaux', 'fas fa-concierge-bell', AnimalRace::class);
         yield MenuItem::linkToCrud('Animaux', 'fas fa-concierge-bell', Amnial::class);
         yield MenuItem::linkToCrud('Avis', 'fas fa-comment', Avis::class);
-
+        yield MenuItem::linkToCrud('Ouverture', 'fas fa-clock', Ouvertures::class);
         yield MenuItem::linkToRoute('Gérer les mises à jour des animaux', 'fas fa-paw', 'app_animal_status');
     }
 }

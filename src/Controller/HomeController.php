@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Avis;
 use App\Entity\Habitats;
+use App\Entity\Ouvertures;
 use App\Entity\Service;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,11 +23,13 @@ class HomeController extends AbstractController
     {
         $services=$this->entityManager->getRepository(Service::class)->findAll();
         $habitats=$this->entityManager->getRepository(Habitats::class)->findAll();
+        $openings=$this->entityManager->getRepository(Ouvertures::class)->findAll();
         $avis=$this->entityManager->getRepository(Avis::class)->findAll();
         return $this->render('home/index.html.twig',[
             'services'=>$services,
             'habitats'=>$habitats,
-            'avis'=>$avis
+            'avis'=>$avis,
+            'openings'=>$openings
         ]);
     }
 }
