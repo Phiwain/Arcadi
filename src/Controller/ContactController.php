@@ -56,8 +56,6 @@ class ContactController extends AbstractController
 
 
         if ($avisForm->isSubmitted() && $avisForm->isValid()) {
-            // Traiter le formulaire d'avis
-            // Par défaut, définir published à false
             $avis->setIsPublished(false);
 
             $entityManager->persist($avis);

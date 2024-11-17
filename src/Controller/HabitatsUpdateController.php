@@ -35,23 +35,18 @@ class HabitatsUpdateController extends AbstractController
         EntityManagerInterface $entityManager,
         HabitatsUpdateRepository $habitatsUpdateRepository
     ): Response {
-        // Récupérer les mises à jour précédentes pour l'habitat
-        $updates = $habitatsUpdateRepository->findBy(['habitat' => $habitat], ['createdAt' => 'DESC']);
 
-        // Créer une nouvelle instance de HabitatsUpdate
+        $updates = $habitatsUpdateRepository->findBy(['habitat' => $habitat], ['createdAt' => 'DESC']);
         $habitatsUpdate = new HabitatsUpdate();
         $habitatsUpdate->setHabitat($habitat);
-
-        // Créer le formulaire
         $form = $this->createForm(HabitatsUpdateType::class, $habitatsUpdate);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Enregistrer la nouvelle mise à jour
+
             $entityManager->persist($habitatsUpdate);
             $entityManager->flush();
 
-            // Rediriger vers la même page pour voir la mise à jour dans l'historique
             return $this->redirectToRoute('app_habitats_update_update', ['id' => $habitat->getId()]);
         }
 

@@ -58,5 +58,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Animaux', 'fas fa-paw', Amnial::class);
 
         yield MenuItem::linkToRoute('Compte rendus vétérinaires', 'fas fa-paw', 'app_all_rapports');
+        yield MenuItem::linkToRoute('Compteur de vues', 'fas fa-clock', 'admin_stats');
     }
 }
