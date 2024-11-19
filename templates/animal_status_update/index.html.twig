@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sélectionner un animal{% endblock %}
+
+{% block body %}
+    <h1>Choisissez un animal à mettre à jour</h1>
+<div class="text-center w-75 mx-auto">
+    <form id="animalSelectionForm">
+        <label class="mt-3" for="animal-select">Sélectionner un animal :</label>
+        <select class="mt-3" id="animal-select" name="animal" onchange="redirectToAnimalUpdate()">
+            <option value="">--Sélectionnez un animal--</option>
+            {% for animal in animals %}
+                <option value="{{ animal.id }}">{{ animal.nom }}</option>
+            {% endfor %}
+        </select>
+    </form>
+    </div>
+    <script>
+        function redirectToAnimalUpdate() {
+            const select = document.getElementById('animal-select');
+            const animalId = select.value;
+
+            if (animalId) {
+                // Rediriger vers la route de mise à jour de l'animal sélectionné
+                window.location.href = "{{ path('app_animal_status_update', {'id': 'ANIMAL_ID'}) }}".replace('ANIMAL_ID', animalId);
+            }
+        }
+    </script>
+{% endblock %}

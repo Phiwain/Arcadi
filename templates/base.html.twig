@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <title>Zoo - Arcadia</title>
+    <title>{% block title %}Zoo Arcadia{% endblock %}</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/cover/">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
@@ -29,20 +29,25 @@
             <div class="collapse navbar-collapse nav-masthead mx-auto" id="navbarCollapse">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item py-1 px-2 ">
-                        <a class="nav-link fw-bold active" aria-current="page" href="#">Accueil</a>
+                        <a class="nav-link fw-bold active" aria-current="page" href="{{ path('app_home') }}">Accueil</a>
                     </li>
                     <li class="nav-item py-1 px-2 ">
-                        <a class="nav-link fw-bold " href="#">Services</a>
+                        <a class="nav-link fw-bold " href="{{ path('app_services') }}">Services</a>
                     </li>
                     <li class="nav-item py-1 px-2 ">
-                        <a class="nav-link fw-bold " href="#">Habitats</a>
+                        <a class="nav-link fw-bold " href="{{ path('app_habitats') }}">Habitats</a>
                     </li>
                     <li class="nav-item py-1 px-2 ">
-                        <a class="nav-link fw-bold  " href="#">Contact</a>
+                        <a class="nav-link fw-bold  " href="{{ path('app_contact') }}">Contact</a>
                     </li>
                 </ul>
                 <hr class="d-block d-md-none mb-sm-2">
-                <a class=" fw-bold py-1 px-2 nav-link-bordered" href="#">Espace Professionel</a>
+                {% if app.user %}
+                <a href="{{ path('account') }}"><button type="button" class="fw-bold py-1 px-2 nav-link-bordered">Mon espace Pro</button></a>   <a href="{{ path('app_logout') }}"><button type="button" class="btn btn-outline-danger m-2">Deconnexion</button></a>
+            {% else %}
+                <a href="{{ path('app_login') }}"><button type="button" class="fw-bold py-1 px-2 nav-link-bordered">Espace Professionel</button></a>
+                {% endif%}
+
             </div>
         </nav>
     </header>
@@ -53,7 +58,7 @@
     <footer class="container">
         <div class="row mt-3 mb-3">
             <!-- Colonne 1: Adresse -->
-            <div class="col-12 col-md-3 d-flex flex-column align-items-center justify-content-center text-center fs-4">
+            <div class="col-12 col-md-4 d-flex flex-column align-items-center justify-content-center text-center fs-4">
                 <address>
                     <p>Zoo Arcadia<br>
                         Avenue des fougères<br>
@@ -62,27 +67,15 @@
             </div>
             <hr class="d-block d-md-none my-3">
             <!-- Colonne 2: Google Maps -->
-            <div class="col-12 col-md-3 d-flex align-items-center text-center">
+            <div class="col-12 col-md-4 d-flex align-items-center text-center">
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7241.555941765286!2d-2.1894747782877926!3d48.01369631507954!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x480fad108767738d%3A0x40ca5cd36e4acd0!2s35380%20Paimpont!5e0!3m2!1sfr!2sfr!4v1725825382669!5m2!1sfr!2sfr"
                         width="100%" height="275" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
             <hr class="d-block d-md-none my-3">
-            <!-- Colonne 3: Horaires -->
-            <div class="col-12 col-md-3 d-flex flex-column align-items-center text-center my-auto mt-sm-2">
-                <h4 class="fs-4">Horaires d'ouverture</h4>
-                <ul class="list-unstyled fs-5">
-                    <li class="p-1">Lundi: de 8h à 19h30</li>
-                    <li class="p-1">Mardi: de 8h à 19h30</li>
-                    <li class="p-1">Mercredi: de 8h à 19h30</li>
-                    <li class="p-1">Jeudi: de 8h à 19h30</li>
-                    <li class="p-1">Vendredi: de 8h à 19h30</li>
-                    <li class="p-1">Samedi: de 8h à 19h30</li>
-                    <li class="p-1">Dimanche: de 8h à 19h30</li>
-                </ul>
-            </div>
+
             <hr class="d-block d-md-none my-3">
             <!-- Colonne 4: Réseaux Sociaux -->
-            <div class="col-12 col-md-3 d-flex align-items-center justify-content-center fs-4 mt-sm-2">
+            <div class="col-12 col-md-4 d-flex align-items-center justify-content-center fs-4 mt-sm-2">
                 <div>
                     <div class="d-flex align-items-center mb-2">
                         <i class="fab fa-facebook-f me-2"></i>

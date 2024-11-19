@@ -1,0 +1,123 @@
+{# templates/rapports_veterinaire/allrapports.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Tous les rapports{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <!-- Formulaire de recherche -->
+            <div class="col-md-3">
+                <h2>Recherche</h2>
+                <div class="form-group">
+                    <label for="animalFilter">Animal</label>
+                    <select id="animalFilter" class="form-control">
+                        <option value="">Tous les animaux</option>
+                        {% for animal in animals %}
+                            <option value="{{ animal.nom }}">{{ animal.nom }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="startDateFilter">Date de début</label>
+                    <input type="date" id="startDateFilter" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="endDateFilter">Date de fin</label>
+                    <input type="date" id="endDateFilter" class="form-control">
+                </div>
+                <!-- Modification du bouton pour utiliser btn-success -->
+                <button id="resetFilters" class="btn btn-success mt-2">Réinitialiser</button>
+            </div>
+            <!-- Tableau des rapports -->
+            <div class="col-md-9">
+                <h1>Tous les rapports</h1>
+
+                <table class="table table-striped" id="rapportsTable">
+                    <thead>
+                    <tr>
+                        <th>Animal</th>
+                        <th>Date de passage</th>
+                        <th>État</th>
+                        <th>Poids</th>
+                        <th>Nourriture</th>
+                        <th>Poids Nourriture</th>
+                        <th>Détails</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for rapport in rapports %}
+                        <tr>
+                            <td>{{ rapport.Animal.nom }}</td>
+                            <td>{{ rapport.datePassage|date('Y-m-d') }}</td>
+                            <td>{{ rapport.etat }}</td>
+                            <td>{{ rapport.poids }} kg</td>
+                            <td>{{ rapport.nourriture }}</td>
+                            <td>{{ rapport.poidsNourriture }} kg</td>
+                            <td>{{ rapport.detail|striptags  }}</td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="7">Aucun rapport trouvé.</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    {# Inclusion du script de filtrage #}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const animalFilter = document.getElementById('animalFilter');
+            const startDateFilter = document.getElementById('startDateFilter');
+            const endDateFilter = document.getElementById('endDateFilter');
+            const resetFilters = document.getElementById('resetFilters');
+            const table = document.getElementById('rapportsTable');
+            const rows = Array.from(table.getElementsByTagName('tbody')[0].getElementsByTagName('tr'));
+
+            function filterTable() {
+                const animalValue = animalFilter.value.toLowerCase();
+                const startDateValue = startDateFilter.value;
+                const endDateValue = endDateFilter.value;
+
+                rows.forEach(row => {
+                    const animalCell = row.cells[0].textContent.toLowerCase();
+                    const dateCell = row.cells[1].textContent;
+
+                    let showRow = true;
+
+                    // Filtrer par animal
+                    if (animalValue && animalCell !== animalValue) {
+                        showRow = false;
+                    }
+
+                    // Filtrer par date de début
+                    if (startDateValue && dateCell < startDateValue) {
+                        showRow = false;
+                    }
+
+                    // Filtrer par date de fin
+                    if (endDateValue && dateCell > endDateValue) {
+                        showRow = false;
+                    }
+
+                    row.style.display = showRow ? '' : 'none';
+                });
+            }
+
+            // Ajouter des écouteurs d'événements
+            animalFilter.addEventListener('change', filterTable);
+            startDateFilter.addEventListener('change', filterTable);
+            endDateFilter.addEventListener('change', filterTable);
+
+            resetFilters.addEventListener('click', function () {
+                animalFilter.value = '';
+                startDateFilter.value = '';
+                endDateFilter.value = '';
+                filterTable();
+            });
+        });
+    </script>
+{% endblock %}

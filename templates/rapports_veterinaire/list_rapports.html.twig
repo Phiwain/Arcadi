@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rapports pour {{ animal_name }}{% endblock %}
+
+{% block body %}
+    <h1>Rapports pour {{ animal_name }}</h1>
+
+    {% if rapports is not empty %}
+        <ul>
+            {% for rapport in rapports %}
+                <li class="list-group-item ">
+                    <a href="{{ path('app_rapports_status_update', { 'id': rapport.id }) }}">
+                        Rapport du {{ rapport.datePassage|date('d/m/Y') }} - {{ rapport.etat }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Aucun rapport n'existe pour cet animal.</p>
+        <a href="{{ path('app_rapports_status_create', { 'animalId': animal_id }) }}" class="btn btn-primary">Créer le premier rapport</a>
+    {% endif %}
+
+    <a href="{{ path('app_rapports_status') }}" class="btn btn-secondary mt-4">Retour à la sélection d'animaux</a>
+{% endblock %}

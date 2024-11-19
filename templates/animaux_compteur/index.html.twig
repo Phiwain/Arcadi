@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+<h1>Statistiques des Animaux</h1>
+<p>Nombre total de vues : {{ totalViews }}</p>
+
+<table>
+    <thead>
+    <tr>
+        <th>Nom de l'animal</th>
+        <th>Nombre de vues</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for animal in animals %}
+        <tr>
+            <td>{{ animal.nom }}</td>
+            <td>{{ animal.views }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

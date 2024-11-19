@@ -1,0 +1,10 @@
+{% block subject %}
+    Nouveau message de contact: {{ subject }}
+{% endblock %}
+
+{% block body %}
+    <p>Vous avez reçu un nouveau message de contact :</p>
+    <p><strong>Email :</strong> {{ userEmail }}</p> <!-- Utilisez 'userEmail' ici -->
+    <p><strong>Message :</strong></p>
+    <p>{{ message|nl2br }}</p>
+{% endblock %}
