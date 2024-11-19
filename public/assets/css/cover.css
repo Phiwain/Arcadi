@@ -97,3 +97,15 @@ body {
     }
 
 }
+@media (max-width: 768px) { /* Mobile devices */
+   .tables-perso {
+        display: block;
+        overflow-x: auto;
+        width: auto; /* Prevent table from taking full width */
+    }
+
+   .tables-perso {
+        width: 100%;
+        min-width: 600px; /* Adjust minimum width for scrolling */
+    }
+}
