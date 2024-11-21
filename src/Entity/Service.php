@@ -16,7 +16,7 @@ class Service
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: Types::TEXT)]
     private ?string $descrition = null;
 
     #[ORM\Column(length: 255)]
