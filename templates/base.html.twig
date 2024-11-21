@@ -17,40 +17,50 @@
 <body class="d-flex  text-center ">
 
 <div class="cover-container d-flex w-100 h-100  flex-column mx-auto">
-    <header class="mb-auto w-100 mt-2" >
-        <nav class="container-fluid d-flex justify-content-between align-items-center navbar navbar-expand-md m-0 p-0">
+<header class="mb-auto w-100 mt-2">
+    <nav class="container-fluid d-flex justify-content-between align-items-center navbar navbar-expand-md m-0 p-0">
 
-            <a class="nav-link" style="width: 200px" href="#">
-                <img class="img-fluid logo" src="{{ asset('assets/images/logo.png') }}" alt="Logo">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse nav-masthead mx-auto" id="navbarCollapse">
-                <ul class="navbar-nav mx-auto">
-                    <li class="nav-item py-1 px-2 ">
-                        <a class="nav-link fw-bold active" aria-current="page" href="{{ path('app_home') }}">Accueil</a>
-                    </li>
-                    <li class="nav-item py-1 px-2 ">
-                        <a class="nav-link fw-bold " href="{{ path('app_services') }}">Services</a>
-                    </li>
-                    <li class="nav-item py-1 px-2 ">
-                        <a class="nav-link fw-bold " href="{{ path('app_habitats') }}">Habitats</a>
-                    </li>
-                    <li class="nav-item py-1 px-2 ">
-                        <a class="nav-link fw-bold  " href="{{ path('app_contact') }}">Contact</a>
-                    </li>
-                </ul>
-                <hr class="d-block d-md-none mb-sm-2">
-                {% if app.user %}
-                <a href="{{ path('account') }}"><button type="button" class="fw-bold py-1 px-2 nav-link-bordered">Mon espace Pro</button></a>   <a href="{{ path('app_logout') }}"><button type="button" class="btn btn-outline-danger m-2">Deconnexion</button></a>
+        <a class="nav-link" style="width: 200px" href="{{ path('app_home') }}">
+            <img class="img-fluid logo" src="{{ asset('assets/images/logo.png') }}" alt="Logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse nav-masthead mx-auto" id="navbarCollapse">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item py-1 px-2">
+                    <a class="nav-link fw-bold {% if app.request.attributes.get('_route') == 'app_home' %}active{% endif %}" 
+                       aria-current="page" href="{{ path('app_home') }}">Accueil</a>
+                </li>
+                <li class="nav-item py-1 px-2">
+                    <a class="nav-link fw-bold {% if app.request.attributes.get('_route') == 'app_services' %}active{% endif %}" 
+                       href="{{ path('app_services') }}">Services</a>
+                </li>
+                <li class="nav-item py-1 px-2">
+                    <a class="nav-link fw-bold {% if app.request.attributes.get('_route') == 'app_habitats' %}active{% endif %}" 
+                       href="{{ path('app_habitats') }}">Habitats</a>
+                </li>
+                <li class="nav-item py-1 px-2">
+                    <a class="nav-link fw-bold {% if app.request.attributes.get('_route') == 'app_contact' %}active{% endif %}" 
+                       href="{{ path('app_contact') }}">Contact</a>
+                </li>
+            </ul>
+            <hr class="d-block d-md-none mb-sm-2">
+            {% if app.user %}
+                <a href="{{ path('account') }}">
+                    <button type="button" class="fw-bold py-1 px-2 nav-link-bordered">Mon espace Pro</button>
+                </a>
+                <a href="{{ path('app_logout') }}">
+                    <button type="button" class="btn btn-outline-danger m-2">Déconnexion</button>
+                </a>
             {% else %}
-                <a href="{{ path('app_login') }}"><button type="button" class="fw-bold py-1 px-2 nav-link-bordered">Espace Professionel</button></a>
-                {% endif%}
-
-            </div>
-        </nav>
-    </header>
+                <a href="{{ path('app_login') }}">
+                    <button type="button" class="fw-bold py-1 px-2 nav-link-bordered">Espace Professionnel</button>
+                </a>
+            {% endif %}
+        </div>
+    </nav>
+</header>
 
 
     {% block body %}{% endblock %}
