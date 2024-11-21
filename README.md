@@ -18,5 +18,8 @@ deploiement de l'application en local
       - taper la commande: symfony console doctrine:migration:migrate
       - taper la commande: php composer.phar 
       - taper la commande: symfony server:start
+   
+  - Modifier dans le .env les coordonnées de la base de donnée MongoDB et des informations DNS du MAILER afin que les mails d'inscriptions soient correctement envoyé
 
   - ouvrir l'ip que le terminal vous donne (127.0.0.1:3306 en general)
+  - 
