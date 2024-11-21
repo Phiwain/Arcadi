@@ -22,13 +22,14 @@
         <div class="row ">
             <h2 class="mt-4 mb-3"> Nos services</h2>
 
-            {% for service in services %}
+                       {% for service in services %}
                 <div class="col-lg-4">
 
-
+                    <a href="{{ path('app_services', { id: service.id }) }}" class="text-decoration-none text-reset">
                     <img src="/uploads/images/services/{{ service.illustration }}" class="bd-placeholder-img rounded-circle" width="200" height="200"  style="object-fit: cover"  focusable="false">
                     <h3>{{service.nom  }}</h3>
                     <p>{{ service.descriptionhome }}</p>
+                    </a>
 
                 </div>
             {% endfor %}
@@ -39,13 +40,17 @@
             <h2 class="mt-4 mb-3"> Nos Habitats</h2>
 
 
-            {% for habitat in habitats %}
-                <div class="container-fluid w-75 p-0" >
-                    <img src="/uploads/images/habitats/{{ habitat.illustration }}" alt="" class="img-fluid w-100  object-fit-cover overflow-hidden" style="height: 300px">
-                    <h3>{{habitat.nom  }}</h3>
-
-                </div>
-            {% endfor %}
+{% for habitat in habitats %}
+    <div class="container-fluid w-75 p-0 mb-3">
+        <a href="{{ path('app_habitats', { id: habitat.id }) }}" class="text-decoration-none text-reset">
+            <img src="/uploads/images/habitats/{{ habitat.illustration }}" 
+                 alt="{{ habitat.nom }}" 
+                 class="img-fluid w-100 object-fit-cover overflow-hidden" 
+                 style="height: 300px">
+            <h3 class="mt-2">{{ habitat.nom }}</h3>
+        </a>
+    </div>
+{% endfor %}
 
 
             <hr>
